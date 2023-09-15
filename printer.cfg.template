@@ -1,0 +1,67 @@
+[include fluidd.cfg]
+[virtual_sdcard]
+path: /home/biqu/printer_data/gcodes
+on_error_gcode: CANCEL_PRINT
+
+[include config.d/*]
+[include macros.d/*]
+
+[mcu]
+canbus_uuid: ad2b4597ac13
+[mcu can0]
+canbus_uuid: 4d63cfc036f3
+
+[tmc2209 stepper_x]
+run_current: 1.25
+
+[tmc2209 stepper_y]
+run_current: 1.25
+
+[extruder]
+nozzle_diameter: 0.400
+pressure_advance: 0.05
+pressure_advance_smooth_time: 0.030
+
+## Client variable macro for your printer.cfg
+[gcode_macro _CLIENT_VARIABLE]
+variable_use_custom_pos   : True  ; use custom park coordinates for x,y [True/False]
+variable_custom_park_x    : 5.0   ; custom x position; value must be within your defined min and max of X
+variable_custom_park_y    : 275.0 ; custom y position; value must be within your defined min and max of Y
+variable_custom_park_dz   : 2.0   ; custom dz value; the value in mm to lift the nozzle when move to park position
+variable_retract          : 1.0   ; the value to retract while PAUSE
+variable_cancel_retract   : 5.0   ; the value to retract while CANCEL_PRINT
+variable_speed_retract    : 35.0  ; retract speed in mm/s
+variable_unretract        : 1.0   ; the value to unretract while RESUME
+variable_speed_unretract  : 35.0  ; unretract speed in mm/s
+variable_speed_hop        : 10.0  ; z move speed in mm/s
+variable_speed_move       : 150.0 ; move speed in mm/s
+variable_park_at_cancel   : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+# !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
+variable_use_fw_retract   : False ; use fw_retraction instead of the manual version [True/False]
+variable_idle_timeout     : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
+gcode:
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [heater_bed]
+#*# control = pid
+#*# pid_kp = 41.706
+#*# pid_ki = 0.430
+#*# pid_kd = 1010.338
+#*#
+#*# [extruder]
+#*# control = pid
+#*# pid_kp = 20.617
+#*# pid_ki = 1.216
+#*# pid_kd = 87.363
+#*#
+#*# [bltouch]
+#*# z_offset = 2.830
+#*#
+#*# [input_shaper]
+#*# shaper_type_x = mzv
+#*# shaper_freq_x = 77.4
+#*# shaper_type_y = mzv
