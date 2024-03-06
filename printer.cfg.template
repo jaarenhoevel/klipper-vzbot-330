@@ -1,26 +1,53 @@
+[include moonraker_obico_macros.cfg]
 [include fluidd.cfg]
 [virtual_sdcard]
-path: /home/biqu/printer_data/gcodes
+path: /home/pi/printer_data/gcodes
 on_error_gcode: CANCEL_PRINT
 
 [include config.d/*]
 [include macros.d/*]
+# [include portable-input-shaper.cfg]
+# [include nozzle-input-shaper.cfg]
 
 [mcu]
 canbus_uuid: ad2b4597ac13
 [mcu can0]
 canbus_uuid: 4d63cfc036f3
+[mcu host]
+serial: /tmp/klipper_host_mcu
 
-[tmc2209 stepper_x]
-run_current: 1.25
+[tmc2240 stepper_x]
+run_current: 1.0
 
-[tmc2209 stepper_y]
-run_current: 1.25
+[tmc2240 stepper_y]
+run_current: 1.0
 
 [extruder]
 nozzle_diameter: 0.400
-pressure_advance: 0.05
-pressure_advance_smooth_time: 0.030
+pressure_advance: 0.052
+# nozzle_diameter: 0.600
+# pressure_advance: 0.030
+# nozzle_diameter: 1.000
+# pressure_advance: 0.014
+pressure_advance_smooth_time: 0.04
+
+[neopixel bed_light]
+initial_RED: 0.25
+initial_GREEN: 0.25
+initial_BLUE: 0.25
+
+[force_move]
+enable_force_move: True
+
+[skew_correction]
+
+[linear_movement_vibrations]
+accel_chip: adxl345
+x_min: 50
+x_max: 250
+y_min: 50
+y_max: 250
+output_directory: /home/pi/printer_data/config/linear_vibrations/
 
 ## Client variable macro for your printer.cfg
 [gcode_macro _CLIENT_VARIABLE]
@@ -35,7 +62,7 @@ variable_unretract        : 1.0   ; the value to unretract while RESUME
 variable_speed_unretract  : 35.0  ; unretract speed in mm/s
 variable_speed_hop        : 10.0  ; z move speed in mm/s
 variable_speed_move       : 150.0 ; move speed in mm/s
-variable_park_at_cancel   : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+variable_park_at_cancel   : True ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
 variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 # !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
@@ -54,14 +81,38 @@ gcode:
 #*#
 #*# [extruder]
 #*# control = pid
-#*# pid_kp = 20.617
-#*# pid_ki = 1.216
-#*# pid_kd = 87.363
+#*# pid_kp = 23.430
+#*# pid_ki = 1.860
+#*# pid_kd = 73.806
 #*#
-#*# [bltouch]
-#*# z_offset = 2.830
+#*# [probe]
+#*# z_offset = 1.475
 #*#
 #*# [input_shaper]
 #*# shaper_type_x = mzv
-#*# shaper_freq_x = 77.4
-#*# shaper_type_y = mzv
+#*# shaper_freq_x = 73.0
+#*# shaper_type_y = zv
+#*# shaper_freq_y = 63.8
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  -0.027292, -0.006458, 0.020000, 0.056875
+#*# 	  -0.009167, 0.000833, 0.012708, 0.049583
+#*# 	  0.050833, 0.063542, 0.082708, 0.115000
+#*# 	  0.160417, 0.152292, 0.163542, 0.191875
+#*# x_count = 4
+#*# y_count = 4
+#*# mesh_x_pps = 2
+#*# mesh_y_pps = 2
+#*# algo = lagrange
+#*# tension = 0.2
+#*# min_x = 107.41
+#*# max_x = 222.58
+#*# min_y = 82.41
+#*# max_y = 197.58
+#*#
+#*# [skew_correction CaliFlower]
+#*# xy_skew = -0.0003005862391504079
+#*# xz_skew = 0.0
+#*# yz_skew = 0.0
