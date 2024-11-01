@@ -2,10 +2,10 @@
 Current setup:
 ### Toolhead
 - BTT EBB 36 CAN
-- EVA 2.4
+- Vz-Printhead-Printed
 - Orbiter 2.0 with filament sensor
-- Paetus Rapido UHF
-- BTT Micro Probe
+- Phaetus Rapido UHF
+- Cartographer Probe
 
 ### Motion system
 #### X/Y:
@@ -25,7 +25,7 @@ Current setup:
 ### Heated Bed
 - 8mm aluminum custom CNC
 - 750W silicon heater
-- Magnetic Base
+- Magnetic base
 - 2 embedded auxillary thermistors
 
 ### Accessories
