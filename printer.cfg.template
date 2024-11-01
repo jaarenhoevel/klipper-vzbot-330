@@ -16,15 +16,18 @@ canbus_uuid: 4d63cfc036f3
 [mcu host]
 serial: /tmp/klipper_host_mcu
 
-[tmc2240 stepper_x]
-run_current: 1.0
+[printer]
+kinematics: corexy
+max_velocity: 800
 
-[tmc2240 stepper_y]
-run_current: 1.0
+[resonance_tester]
+accel_chip: adxl345
+probe_points:
+    165, 150, 50
 
 [extruder]
 nozzle_diameter: 0.400
-pressure_advance: 0.052
+pressure_advance: 0.044
 # nozzle_diameter: 0.600
 # pressure_advance: 0.030
 # nozzle_diameter: 1.000
@@ -40,6 +43,9 @@ initial_BLUE: 0.25
 enable_force_move: True
 
 [skew_correction]
+
+[scanner]
+backlash_comp: 0.01624
 
 [linear_movement_vibrations]
 accel_chip: adxl345
@@ -75,9 +81,9 @@ gcode:
 #*#
 #*# [heater_bed]
 #*# control = pid
-#*# pid_kp = 41.706
-#*# pid_ki = 0.430
-#*# pid_kd = 1010.338
+#*# pid_kp = 37.280
+#*# pid_ki = 1.603
+#*# pid_kd = 216.690
 #*#
 #*# [extruder]
 #*# control = pid
@@ -85,34 +91,27 @@ gcode:
 #*# pid_ki = 1.860
 #*# pid_kd = 73.806
 #*#
-#*# [probe]
-#*# z_offset = 1.475
-#*#
 #*# [input_shaper]
 #*# shaper_type_x = mzv
-#*# shaper_freq_x = 73.0
+#*# shaper_freq_x = 76.8
 #*# shaper_type_y = zv
-#*# shaper_freq_y = 63.8
+#*# shaper_freq_y = 41.6
 #*#
-#*# [bed_mesh default]
-#*# version = 1
-#*# points =
-#*# 	  -0.027292, -0.006458, 0.020000, 0.056875
-#*# 	  -0.009167, 0.000833, 0.012708, 0.049583
-#*# 	  0.050833, 0.063542, 0.082708, 0.115000
-#*# 	  0.160417, 0.152292, 0.163542, 0.191875
-#*# x_count = 4
-#*# y_count = 4
-#*# mesh_x_pps = 2
-#*# mesh_y_pps = 2
-#*# algo = lagrange
-#*# tension = 0.2
-#*# min_x = 107.41
-#*# max_x = 222.58
-#*# min_y = 82.41
-#*# max_y = 197.58
+#*# [scanner model default]
+#*# model_coef = 1.4226456410507005,
+#*# 	1.7556925057056774,
+#*# 	0.9342841355163247,
+#*# 	1.2242375373650527,
+#*# 	-0.26218181769643384,
+#*# 	-2.419348449028398,
+#*# 	0.4983773909662427,
+#*# 	3.1104854375036766,
+#*# 	-0.04198194073937396,
+#*# 	-1.2186111668162138
+#*# model_domain = 3.2355997701242067e-07,3.3487405952364163e-07
+#*# model_range = 0.100000,5.000000
+#*# model_temp = 23.513102
+#*# model_offset = 0.00000
 #*#
-#*# [skew_correction CaliFlower]
-#*# xy_skew = -0.0003005862391504079
-#*# xz_skew = 0.0
-#*# yz_skew = 0.0
+#*# [scanner]
+#*# scanner_touch_z_offset = 0.200
